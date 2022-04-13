@@ -4,6 +4,32 @@ const User = db.users;
 const Address =db.address
 const Op = db.Sequelize.Op;
 
+
+//one two one
+exports.one2one = async (req, res) => {
+
+  
+db.users.hasOne(db.address, { foreignKey: "user_id" });
+db.address.belongsTo(db.users, { foreignKey: "user_id" });
+
+  const id = req.body.id;
+  // const id = 1;
+
+  User.findByPk(id, {
+    include: [Address]
+  })
+    .then(data => {
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving users."
+      });
+    });
+}
+
+
 // Create and Save a new User
 exports.create = (req, res) => {
   // Validate request
