@@ -8,6 +8,13 @@ module.exports=(sequelize, Sequelize) => {
         },
         phone:{
             type: Sequelize.STRING
+        },
+        user_id:{
+            type: Sequelize.INTEGER,
+            references:{
+                model: 'users',
+                key: 'id'     
+            }
         }
     })
 
