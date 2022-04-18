@@ -15,7 +15,7 @@ module.exports = app => {
   
     router.delete("/", users.deleteAll);
 
-    router.get("/one2one", users.one2one);
+    router.post("/one2one", users.one2one);
   
     app.use("/api", router);
   };
